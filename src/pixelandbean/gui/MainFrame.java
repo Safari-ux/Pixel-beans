@@ -15,9 +15,14 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
-        initComponents();
-    }
+    
+public MainFrame() {
+    initComponents();
+    this.setLocationRelativeTo(null); 
+    this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+    this.pack(); 
+    System.out.println("MainFrame cargó correctamente");
+} 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,11 +49,11 @@ public class MainFrame extends javax.swing.JFrame {
         lblEstado.setLayout(lblEstadoLayout);
         lblEstadoLayout.setHorizontalGroup(
             lblEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         lblEstadoLayout.setVerticalGroup(
             lblEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
@@ -58,12 +63,12 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(panelContenidoLayout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                .addGap(0, 255, Short.MAX_VALUE)
+                .addContainerGap(331, Short.MAX_VALUE)
                 .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -99,7 +104,9 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarProductoActionPerformed
-        // TODO add your handling code here:
+        AgregarProductoFrame ap = new AgregarProductoFrame();
+    ap.setLocationRelativeTo(this);
+    ap.setVisible(true);
     }//GEN-LAST:event_itemAgregarProductoActionPerformed
 
     /**

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package pixelandbean.gui;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Safagod
@@ -59,9 +59,11 @@ public class LoginFrameNew extends javax.swing.JFrame {
 
         lblPassword.setText("Contraseña");
 
-        txtUsuario.setText("jTextField1");
-
-        txtPassword.setText("jPasswordField1");
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,10 +78,10 @@ public class LoginFrameNew extends javax.swing.JFrame {
                             .addComponent(lblPassword)
                             .addComponent(lblUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnIngresar)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(txtPassword))))
                 .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
@@ -106,24 +108,34 @@ public class LoginFrameNew extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         verificarLogin();
     }//GEN-LAST:event_btnIngresarActionPerformed
-    private void verificarLogin() {
-        String user = txtUsuario.getText();
-        String pass = new String(txtPassword.getPassword());
 
-        if (user.equals("admin") && pass.equals("inicio123")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido Administrador");
-            MainFrame mf = new MainFrame();
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+private void verificarLogin() {
+    String user = txtUsuario.getText();
+    String pass = new String(txtPassword.getPassword());
+
+    if (user.equals("admin") && pass.equals("inicio123")) {
+        JOptionPane.showMessageDialog(this, "Bienvenido Administrador");
+        
+        MainFrame mf = new MainFrame();
+        mf.setLocationRelativeTo(this); // Centrar ventana
         mf.setVisible(true);
         this.dispose();
-        } else if (user.equals("empleado") && pass.equals("inicio321")) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido Empleado");
-             MainFrame mf = new MainFrame();
+
+    } else if (user.equals("empleado") && pass.equals("inicio321")) {
+        JOptionPane.showMessageDialog(this, "Bienvenido Empleado");
+        
+        MainFrame mf = new MainFrame();
+        mf.setLocationRelativeTo(this); 
         mf.setVisible(true);
         this.dispose();
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
-        }
+
+    } else {
+        JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
     }
+}
     /**
      * @param args the command line arguments
      */
