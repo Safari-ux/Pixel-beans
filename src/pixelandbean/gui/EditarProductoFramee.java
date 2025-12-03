@@ -5,34 +5,41 @@
 package pixelandbean.gui;
 
 import javax.swing.JOptionPane;
-import pixelandbean.model.ProductoController;
 import pixelandbean.model.Producto;
+import pixelandbean.model.ProductoController;
+
 
 /**
  *
  * @author Safagod
  */
-public class AgregarProductoFrame extends javax.swing.JFrame {
-    private ProductoController productoController;
-    private MainFrame mainFrame;
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AgregarProductoFrame.class.getName());
+public class EditarProductoFramee extends javax.swing.JFrame {
+private ProductoController productoController;
+private MainFrame mainFrame;
+private Producto producto;
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditarProductoFramee.class.getName());
 
     /**
-     * Creates new form AgregarProductoFrame
+     * Creates new form EditarProductoFramee
      */
-    public AgregarProductoFrame() {
-        initComponents();
-    this.setLocationRelativeTo(null);
-    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    }
-public AgregarProductoFrame(ProductoController controller, MainFrame main) {
+    public EditarProductoFramee(ProductoController controller, MainFrame mainFrame, Producto producto) {
     initComponents();
     this.productoController = controller;
-    this.mainFrame = main;
-    this.setLocationRelativeTo(main);
-    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    this.mainFrame = mainFrame;
+    this.producto = producto;
+
+    cargarDatosProducto();
 }
+private void cargarDatosProducto() {
+    lblId.setText(String.valueOf(producto.getId()));
+    txtNombre.setText(producto.getNombre());
+    txtPrecio.setText(String.valueOf(producto.getPrecio()));
+    chkActivo.setSelected(producto.isActivo());
+}
+    public EditarProductoFramee() {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,21 +50,29 @@ public AgregarProductoFrame(ProductoController controller, MainFrame main) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
-        chkActivo = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblId = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        chkActivo = new javax.swing.JCheckBox();
+
+        jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("ID");
 
-        jLabel2.setText("Precio:");
+        jLabel2.setText("Nombre");
 
-        chkActivo.setText("Activo");
+        jLabel3.setText("Precio");
+
+        jLabel4.setText("Activo");
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,75 +88,98 @@ public AgregarProductoFrame(ProductoController controller, MainFrame main) {
             }
         });
 
+        lblId.setText("0");
+
+        chkActivo.setText("Activo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelar))
+                    .addComponent(btnGuardar)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(chkActivo)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(txtPrecio))))
-                .addContainerGap(114, Short.MAX_VALUE))
+                    .addComponent(lblId)
+                    .addComponent(btnCancelar)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblId))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkActivo)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(chkActivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnGuardar))
-                .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try {
-        String nombre = txtNombre.getText();
-        double precio = Double.parseDouble(txtPrecio.getText());
+    try {
+        // Validar que los campos no estén vacíos
+        if (txtNombre.getText().trim().isEmpty() ||
+            txtPrecio.getText().trim().isEmpty()) {
 
-        // Generar ID nuevo (troleo simple: tamaño + 1)
-        int nuevoId = productoController.getProductos().size() + 1;
+            JOptionPane.showMessageDialog(this, "Por favor completa todos los campos.");
+            return;
+        }
 
-        Producto nuevo = new Producto(nuevoId, nombre, precio, true);
+        // Obtener datos del formulario
+        int id = Integer.parseInt(lblId.getText().trim()); 
+        String nombre = txtNombre.getText().trim();
+        double precio = Double.parseDouble(txtPrecio.getText().trim());
+        boolean activo = chkActivo.isSelected();
 
-        productoController.agregarProducto(nuevo);
+        // Crear objeto actualizado
+        Producto productoActualizado = new Producto(id, nombre, precio, activo);
 
-        // Actualizar tabla en MainFrame
-        mainFrame.actualizarTablaProductos();
+        // Llamar al controlador
+        boolean actualizado = productoController.actualizarProducto(productoActualizado);
 
-        JOptionPane.showMessageDialog(this, "Producto agregado correctamente");
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this, "Producto actualizado correctamente.");
+            this.dispose(); 
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo actualizar el producto.");
+        }
 
-        this.dispose(); // cerrar ventana
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Precio inválido. Ingresa un valor numérico.");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error: verifica los datos ingresados");
-    }     
+        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -167,7 +205,7 @@ public AgregarProductoFrame(ProductoController controller, MainFrame main) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AgregarProductoFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new EditarProductoFramee().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,6 +214,10 @@ public AgregarProductoFrame(ProductoController controller, MainFrame main) {
     private javax.swing.JCheckBox chkActivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

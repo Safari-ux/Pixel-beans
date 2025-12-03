@@ -4,25 +4,50 @@
  */
 package pixelandbean.gui;
 
+import javax.swing.table.DefaultTableModel;
+import pixelandbean.model.Producto;
+import pixelandbean.model.ProductoController;
 /**
  *
  * @author Safagod
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+   
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
-
+    private ProductoController productoController;
     /**
      * Creates new form MainFrame
      */
     
 public MainFrame() {
     initComponents();
-    this.setLocationRelativeTo(null); 
-    this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-    this.pack(); 
-    System.out.println("MainFrame cargó correctamente");
-} 
+        productoController = new ProductoController(); 
+        
+        cargarTablaProductos();
+        
+        this.setLocationRelativeTo(null); 
+        this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.pack(); 
+        
+        System.out.println("MainFrame cargó correctamente");
+    }
+private void cargarTablaProductos() {
+    DefaultTableModel modelo = new DefaultTableModel(
+        new Object[]{"ID", "Nombre", "Precio"}, 0
+    );
+
+    for (Producto p : productoController.getProductos()) {
+        modelo.addRow(new Object[]{ p.getId(), p.getNombre(), p.getPrecio() });
+    }
+
+    tablaProductos.setModel(modelo);
+}
+
+public void actualizarTablaProductos() {
+    cargarTablaProductos();
+}
+// REVISAR ESTO EN CHATGPT
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,11 +60,14 @@ public MainFrame() {
 
         panelContenido = new javax.swing.JPanel();
         lblEstado = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuVentas = new javax.swing.JMenu();
         menuProductos = new javax.swing.JMenu();
         itemAgregarProducto = new javax.swing.JMenuItem();
+        itemEditarProducto = new javax.swing.JMenuItem();
         menuUsuarios = new javax.swing.JMenu();
         menuAyuda = new javax.swing.JMenu();
 
@@ -56,20 +84,41 @@ public MainFrame() {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        tablaProductos.setAutoCreateRowSorter(true);
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaProductos);
+
         javax.swing.GroupLayout panelContenidoLayout = new javax.swing.GroupLayout(panelContenido);
         panelContenido.setLayout(panelContenidoLayout);
         panelContenidoLayout.setHorizontalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContenidoLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addGroup(panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenidoLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelContenidoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelContenidoLayout.setVerticalGroup(
             panelContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenidoLayout.createSequentialGroup()
-                .addContainerGap(331, Short.MAX_VALUE)
-                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(panelContenido, java.awt.BorderLayout.CENTER);
@@ -90,6 +139,14 @@ public MainFrame() {
         });
         menuProductos.add(itemAgregarProducto);
 
+        itemEditarProducto.setText("Editar producto");
+        itemEditarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEditarProductoActionPerformed(evt);
+            }
+        });
+        menuProductos.add(itemEditarProducto);
+
         jMenuBar1.add(menuProductos);
 
         menuUsuarios.setText("Usuarios");
@@ -104,10 +161,42 @@ public MainFrame() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarProductoActionPerformed
-        AgregarProductoFrame ap = new AgregarProductoFrame();
-    ap.setLocationRelativeTo(this);
-    ap.setVisible(true);
+       AgregarProductoFrame apf = new AgregarProductoFrame(productoController, this);
+    apf.setVisible(true);
     }//GEN-LAST:event_itemAgregarProductoActionPerformed
+
+    private void itemEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEditarProductoActionPerformed
+    int fila = tablaProductos.getSelectedRow();
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecciona un producto en la tabla para editar.", "Atención", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Si la tabla tiene RowSorter (ordenamiento), convertir al índice del modelo
+    int modeloRow = tablaProductos.convertRowIndexToModel(fila);
+
+    // Obtener ID desde la columna 0 (asegúrate que la primera columna sea ID)
+    Object idObj = tablaProductos.getModel().getValueAt(modeloRow, 0);
+    int id;
+    try {
+        id = Integer.parseInt(String.valueOf(idObj));
+    } catch (NumberFormatException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "ID inválido en la tabla", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Buscar producto en el controller
+    pixelandbean.model.Producto p = productoController.buscarPorId(id);
+    if (p == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Producto no encontrado", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Abrir la ventana de edición (constructor que ya creaste)
+    EditarProductoFramee editar = new EditarProductoFramee(productoController, this, p);
+    editar.setLocationRelativeTo(this);
+    editar.setVisible(true);
+    }//GEN-LAST:event_itemEditarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,7 +225,9 @@ public MainFrame() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemAgregarProducto;
+    private javax.swing.JMenuItem itemEditarProducto;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lblEstado;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
@@ -144,5 +235,6 @@ public MainFrame() {
     private javax.swing.JMenu menuUsuarios;
     private javax.swing.JMenu menuVentas;
     private javax.swing.JPanel panelContenido;
+    private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }

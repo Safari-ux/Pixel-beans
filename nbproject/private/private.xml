@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/PixelandBeanApp.java</file>
-            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/gui/AgregarProductoFrame.java</file>
             <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/gui/MainFrame.java</file>
-            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/gui/BackgroundPanel.java</file>
+            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/model/Producto.java</file>
+            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/model/ProductoController.java</file>
+            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/gui/EditarProductoFramee.java</file>
+            <file>file:/C:/Users/Safagod/Documents/NetBeansProjects/PixelandBean/src/pixelandbean/PixelandBeanApp.java</file>
         </group>
     </open-files>
 </project-private>
